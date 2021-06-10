@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "994385872614",
+    "firebase_url": "https://duldul-6cf3b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "duldul-6cf3b",
+    "storage_bucket": "duldul-6cf3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994385872614:android:39ef96fec34f19f8fedd27",
+        "android_client_info": {
+          "package_name": "com.duldul.markets_deliveryboy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994385872614-lauohkithj7jcbkq9bakve7ej3dkb29n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.duldul.markets",
+            "certificate_hash": "df200ccfe6fd3bc835ab07113845e0a746c025d7"
+          }
+        },
+        {
+          "client_id": "994385872614-1140k02flj83arb6pvqg7tvasnubr6u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2tCK07Px56UCY_pRka-vo85bhJGYWh7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994385872614-1140k02flj83arb6pvqg7tvasnubr6u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
