@@ -33,7 +33,8 @@ class OrderDetailsController extends ControllerMVC {
   }
 
   Future<void> refreshOrder() async {
-    listenForOrder(id: order.id, message: S.of(state.context).order_refreshed_successfuly);
+    listenForOrder(
+        id: order.id, message: S.of(state.context).order_refreshed_successfuly);
   }
 
   void doDeliveredOrder(Order _order) async {
@@ -42,7 +43,21 @@ class OrderDetailsController extends ControllerMVC {
         this.order.orderStatus.id = '5';
       });
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        content: Text(S.of(state.context).theOrderDeliveredSuccessfullyToClient),
+        content:
+            Text(S.of(state.context).theOrderDeliveredSuccessfullyToClient),
+      ));
+    });
+  }
+
+  void updatedOrder(Order _order) async {
+    updateOrder(_order).then((value) {
+      setState(() {
+        refreshOrder();
+        // this.order.orderStatus.id = '5';
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content:
+            Text(S.of(state.context).theOrderDeliveredSuccessfullyToClient),
       ));
     });
   }

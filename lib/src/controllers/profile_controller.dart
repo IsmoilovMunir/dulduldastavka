@@ -6,6 +6,7 @@ import '../models/order.dart';
 import '../models/user.dart';
 import '../repository/order_repository.dart';
 import '../repository/user_repository.dart';
+import '../repository/user_repository.dart' as repository;
 
 class ProfileController extends ControllerMVC {
   User user = new User();
@@ -48,7 +49,21 @@ class ProfileController extends ControllerMVC {
   Future<void> refreshProfile() async {
     recentOrders.clear();
     user = new User();
-    listenForRecentOrders(message: S.of(state.context).orders_refreshed_successfuly);
+    listenForRecentOrders(
+        message: S.of(state.context).orders_refreshed_successfuly);
     listenForUser();
+  }
+
+  void update(User user) async {
+    user.deviceToken = null;
+    repository.update(user).then((value) {
+      setState(() {
+        //this.favorite = value;
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content:
+            Text(S.of(state.context).profile_settings_updated_successfully),
+      ));
+    });
   }
 }

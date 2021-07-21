@@ -15,6 +15,8 @@ class User {
   // used for indicate if client logged in or not
   bool auth;
 
+  bool available = true;
+
 //  String role;
 
   User();
@@ -41,7 +43,10 @@ class User {
       } catch (e) {
         bio = "";
       }
-      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
+      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
+          ? Media.fromJSON(jsonMap['media'][0])
+          : new Media();
+      available = jsonMap['available'] != null ? jsonMap['available'] : false;
     } catch (e) {
       print(e);
     }
@@ -61,6 +66,7 @@ class User {
     map["address"] = address;
     map["bio"] = bio;
     map["media"] = image?.toMap();
+    map["available"] = available;
     return map;
   }
 

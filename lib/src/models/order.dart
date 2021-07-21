@@ -16,6 +16,7 @@ class Order {
   User user;
   Payment payment;
   Address deliveryAddress;
+  String driver_id;
 
   Order();
 
@@ -23,14 +24,28 @@ class Order {
     try {
       id = jsonMap['id'].toString();
       tax = jsonMap['tax'] != null ? jsonMap['tax'].toDouble() : 0.0;
-      deliveryFee = jsonMap['delivery_fee'] != null ? jsonMap['delivery_fee'].toDouble() : 0.0;
+      deliveryFee = jsonMap['delivery_fee'] != null
+          ? jsonMap['delivery_fee'].toDouble()
+          : 0.0;
       hint = jsonMap['hint'].toString();
-      orderStatus = jsonMap['order_status'] != null ? OrderStatus.fromJSON(jsonMap['order_status']) : new OrderStatus();
+      orderStatus = jsonMap['order_status'] != null
+          ? OrderStatus.fromJSON(jsonMap['order_status'])
+          : new OrderStatus();
       dateTime = DateTime.parse(jsonMap['updated_at']);
-      user = jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : new User();
-      payment = jsonMap['payment'] != null ? Payment.fromJSON(jsonMap['payment']) : new Payment.init();
-      deliveryAddress = jsonMap['delivery_address'] != null ? Address.fromJSON(jsonMap['delivery_address']) : new Address();
-      productOrders = jsonMap['product_orders'] != null ? List.from(jsonMap['product_orders']).map((element) => ProductOrder.fromJSON(element)).toList() : [];
+      user =
+          jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : new User();
+      payment = jsonMap['payment'] != null
+          ? Payment.fromJSON(jsonMap['payment'])
+          : new Payment.init();
+      deliveryAddress = jsonMap['delivery_address'] != null
+          ? Address.fromJSON(jsonMap['delivery_address'])
+          : new Address();
+      productOrders = jsonMap['product_orders'] != null
+          ? List.from(jsonMap['product_orders'])
+              .map((element) => ProductOrder.fromJSON(element))
+              .toList()
+          : [];
+      driver_id = jsonMap['driver_id'] != null ? jsonMap['driver_id'] : '';
     } catch (e) {
       id = '';
       tax = 0.0;
@@ -42,6 +57,7 @@ class Order {
       payment = new Payment.init();
       deliveryAddress = new Address();
       productOrders = [];
+      driver_id = '';
       print(CustomTrace(StackTrace.current, message: e));
     }
   }
@@ -55,7 +71,16 @@ class Order {
     map["delivery_fee"] = deliveryFee;
     map["products"] = productOrders.map((element) => element.toMap()).toList();
     map["payment"] = payment?.toMap();
-    if (deliveryAddress?.id != null && deliveryAddress?.id != 'null') map["delivery_address_id"] = deliveryAddress.id;
+    map["driver_id"] = driver_id;
+    if (deliveryAddress?.id != null && deliveryAddress?.id != 'null')
+      map["delivery_address_id"] = deliveryAddress.id;
+    return map;
+  }
+
+  Map acceptedOrderMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["driver_id"] = driver_id;
     return map;
   }
 
